@@ -2,7 +2,7 @@ package org.axisdesktop.gittest;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
+import java.util.ListIterator;
 
 public class Main {
 
@@ -10,27 +10,31 @@ public class Main {
 		System.out.println( "git test" );
 		List<Category> data = new ArrayList<>();
 
-		String[][] d = { { "catalog", "/", "1", "32" },
-				{ "хуй 269999", "", "2", "17" }, { "899898989", "", "3", "4" },
-				{ "22222", "/khui/22", "5", "6" }, { "11111", "", "7", "8" },
-				{ "8989898", "", "9", "16" }, { "ггг", "", "10", "11" },
-				{ "333", "", "12", "15" }, { "4444", "", "13", "14" },
-				{ "klimat", "/klimat", "18", "23" },
-				{ "Кондиционеры", "/klimat/air-conder", "19", "22" },
-				{ "кондудей", "", "20", "21" },
-				{ "deti", "/deti", "24", "29" },
-				{ "kolyaski", "/deti/kolya99900", "25", "28" },
-				{ "лщлщлщ", "", "26", "27" }, { "input", "", "30", "31" }, };
+		String[][] d = { { "catalog", "/", "1", "32" }, { "хуй 269999", "", "2", "17" }, { "899898989", "", "3", "4" },
+				{ "22222", "/khui/22", "5", "6" }, { "11111", "", "7", "8" }, { "8989898", "", "9", "16" },
+				{ "ггг", "", "10", "11" }, { "333", "", "12", "15" }, { "4444", "", "13", "14" },
+				{ "klimat", "/klimat", "18", "23" }, { "Кондиционеры", "/klimat/air-conder", "19", "22" },
+				{ "кондудей", "", "20", "21" }, { "deti", "/deti", "24", "29" },
+				{ "kolyaski", "/deti/kolya99900", "25", "28" }, { "лщлщлщ", "", "26", "27" },
+				{ "input", "", "30", "31" }, };
 
 		for( String[] row : d ) {
 			data.add( new Category( row ) );
 		}
 
 		// System.out.println( struct( data, data.get( 0 ) ) );
-		Category root = struct( data, data.get( 0 ) );
+		Category root = struct( data, data.remove( 0 ) );
 		System.out.println( root );
+		System.out.println( "------------" );
+		System.out.println( data );
 		for( Category cc : root.getChildren() ) {
-			// System.out.println( cc.getName() );
+			System.out.println( cc.getName() );
+			for( Category dd : cc.getChildren() ) {
+				System.out.println( "  " + dd.getName() );
+				for( Category ee : dd.getChildren() ) {
+					System.out.println( "    " + ee.getName() );
+				}
+			}
 		}
 
 	}
@@ -55,19 +59,46 @@ public class Main {
 
 	public static Category struct( List<Category> list, Category cat ) {
 		Category catNew = new Category( cat );
+		// Category cc;// = new Category( cat );
 
-		for( Category cc : list ) {
-			if( cat.getLeft() >= cc.getLeft()
-					|| cat.getRight() <= cc.getRight() ) continue;
+		for( ListIterator<Category> ci = list.listIterator(); ci.hasNext(); ) {
+			Category cc = ci.next();
+			// ci.set( null );
 
-			System.out.println( cc.getName() );
+			if( cc == null || catNew.getLeft() >= cc.getLeft() || cat.getRight() <= cc.getRight() ) continue;
+			// ci.set( null );
+			// System.out.println( cc.getName() );
+
 			if( cc.getRight() - cc.getLeft() == 1 ) {
+				ci.set( null );
 				catNew.getChildren().add( new Category( cc ) );
+
+				// ci.remove();
 			}
 			else {
+				ci.set( null );
 				catNew.getChildren().add( struct( list, cc ) );
+				// cc = null;
+
 			}
+
 		}
+
+		// for( Iterator<Category> ci = list.iterator(); ci.hasNext(); ) {
+		// Category cc = ci.next();
+		// // ci.remove();
+		// if( cat.getLeft() >= cc.getLeft() || cat.getRight() <= cc.getRight()
+		// ) continue;
+		//
+		// System.out.println( cc.getName() );
+		// if( cc.getRight() - cc.getLeft() == 1 ) {
+		// cat.getChildren().add( cc );
+		// ci.remove();
+		// }
+		// else {
+		// cat.getChildren().add( struct( list, cc ) );
+		// }
+		// }
 
 		return catNew;
 	}

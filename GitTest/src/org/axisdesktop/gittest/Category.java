@@ -76,8 +76,8 @@ public class Category {
 
 	@Override
 	public String toString() {
-		return "\nCategory [name=" + name + ", path=" + path + ", left=" + left
-				+ ", right=" + right + ", children=" + children + "]";
+		return "\nCategory [name=" + name + ", path=" + path + ", left=" + left + ", right=" + right + ", children="
+				+ children + "]\n";
 	}
 
 }
