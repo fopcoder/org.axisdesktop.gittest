@@ -1,11 +1,14 @@
 package org.axisdesktop.gittest;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Category {
 	private String name;
 	private String path;
 	private int left;
 	private int right;
-	private Category[] children;
+	private List<Category> children = new ArrayList<>();
 
 	public Category() {
 	}
@@ -63,18 +66,18 @@ public class Category {
 		this.right = right;
 	}
 
-	public Category[] getChildren() {
+	public List<Category> getChildren() {
 		return children;
 	}
 
-	public void setChildren( Category[] children ) {
+	public void setChildren( List<Category> children ) {
 		this.children = children;
 	}
 
 	@Override
 	public String toString() {
-		return "Category [name=" + name + ", path=" + path + ", left=" + left
-				+ ", right=" + right + "]\n";
+		return "\nCategory [name=" + name + ", path=" + path + ", left=" + left
+				+ ", right=" + right + ", children=" + children + "]";
 	}
 
 }

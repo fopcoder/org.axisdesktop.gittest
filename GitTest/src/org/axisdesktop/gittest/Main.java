@@ -25,7 +25,7 @@ public class Main {
 			data.add( new Category( row ) );
 		}
 
-		System.out.println( data );
+		System.out.println( struct( data, data.get( 0 ) ) );
 
 	}
 
@@ -45,6 +45,23 @@ public class Main {
 		}
 
 		return null;
+	}
+
+	public static Category struct( List<Category> list, Category cat ) {
+		Category catNew = new Category( cat );
+
+		for( Category cc : list ) {
+			if( cat.getLeft() > cc.getLeft() || cat.getRight() < cc.getRight() ) continue;
+
+			if( cc.getRight() - cc.getLeft() == 1 ) {
+				catNew.getChildren().add( new Category( cc ) );
+			}
+			else {
+				// catNew.getChildren().add( struct( list, cc ) );
+			}
+		}
+
+		return catNew;
 	}
 }
 
