@@ -10,13 +10,17 @@ public class Main {
 		System.out.println( "git test" );
 		List<Category> data = new ArrayList<>();
 
-		String[][] d = { { "catalog", "/", "1", "32" }, { "хуй 269999", "", "2", "17" }, { "899898989", "", "3", "4" },
-				{ "22222", "/khui/22", "5", "6" }, { "11111", "", "7", "8" }, { "8989898", "", "9", "16" },
-				{ "ггг", "", "10", "11" }, { "333", "", "12", "15" }, { "4444", "", "13", "14" },
-				{ "klimat", "/klimat", "18", "23" }, { "Кондиционеры", "/klimat/air-conder", "19", "22" },
-				{ "кондудей", "", "20", "21" }, { "deti", "/deti", "24", "29" },
-				{ "kolyaski", "/deti/kolya99900", "25", "28" }, { "лщлщлщ", "", "26", "27" },
-				{ "input", "", "30", "31" }, };
+		String[][] d = { { "catalog", "/", "1", "32" },
+				{ "хуй 269999", "", "2", "17" }, { "899898989", "", "3", "4" },
+				{ "22222", "/khui/22", "5", "6" }, { "11111", "", "7", "8" },
+				{ "8989898", "", "9", "16" }, { "ггг", "", "10", "11" },
+				{ "333", "", "12", "15" }, { "4444", "", "13", "14" },
+				{ "klimat", "/klimat", "18", "23" },
+				{ "Кондиционеры", "/klimat/air-conder", "19", "22" },
+				{ "кондудей", "", "20", "21" },
+				{ "deti", "/deti", "24", "29" },
+				{ "kolyaski", "/deti/kolya99900", "25", "28" },
+				{ "лщлщлщ", "", "26", "27" }, { "input", "", "30", "31" }, };
 
 		for( String[] row : d ) {
 			data.add( new Category( row ) );
@@ -65,7 +69,8 @@ public class Main {
 			Category cc = ci.next();
 			// ci.set( null );
 
-			if( cc == null || catNew.getLeft() >= cc.getLeft() || cat.getRight() <= cc.getRight() ) continue;
+			if( cc == null || catNew.getLeft() >= cc.getLeft()
+					|| cat.getRight() <= cc.getRight() ) continue;
 			// ci.set( null );
 			// System.out.println( cc.getName() );
 
